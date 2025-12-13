@@ -1,0 +1,57 @@
+<!-- views/favorites.ejs -->
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Favorite Songs</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+    <%- include("layout") %>
+
+  <main>
+    <h2>Your Favorite Songs</h2>
+
+    <% if (!songs || songs.length === 0) { %>
+      <p>You haven't saved any songs yet.</p>
+    <% } else { %>
+      <ul class="song-list">
+        <% songs.forEach(song => { %>
+          <li class="song-card">
+            <% if (song.artworkUrl) { %>
+              <img src="<%= song.artworkUrl %>" alt="Cover art">
+            <% } %>
+
+            <div class="song-info">
+              <strong><%= song.title %></strong> — <%= song.artist %><br>
+              <% if (song.album) { %>
+                <span><%= song.album %></span><br>
+              <% } %>
+              <% if (song.previewUrl) { %>
+                <a href="<%= song.previewUrl %>" target="_blank">View on Genius</a>
+              <% } %>
+            </div>
+
+            <form action="/favorites/delete" method="POST" class="delete-form">
+              <input type="hidden" name="apiId" value="<%= song.apiId %>">
+              <button type="submit" class="trash-btn" title="Remove from favorites">🗑️</button>
+            </form>
+            
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </main>
+</body>
+
+</html>

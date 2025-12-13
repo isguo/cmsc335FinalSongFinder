@@ -1,0 +1,75 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Music Search</title>
+  <link rel="stylesheet" href="/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <%- include("layout") %>
+
+  <main>
+    <h2>Search songs on Genius</h2>
+
+    <form action="/search" method="GET" class="search-form">
+      <label for="term">Search term</label>
+      <input
+        type="text"
+        id="term"
+        name="term"
+        value="<%= term %>"
+        placeholder="Song title, artist, or lyric…"
+        required>
+
+      <label for="mode">Search by</label>
+      <select id="mode" name="mode">
+        <option value="title"  <%= mode === "title" ? "selected" : "" %>>Title</option>
+        <option value="artist" <%= mode === "artist" ? "selected" : "" %>>Artist</option>
+        <option value="lyrics" <%= mode === "lyrics" ? "selected" : "" %>>Lyrics snippet</option>
+      </select>
+
+      <button type="submit">Search</button>
+    </form>
+
+    <% if (error) { %>
+      <p class="error"><%= error %></p>
+    <% } %>
+
+    <% if (songs && songs.length > 0) { %>
+      <h3>Results</h3>
+      <ul class="song-list">
+        <% songs.forEach(song => { %>
+          <li class="song-card">
+            <% if (song.artworkUrl) { %>
+              <img src="<%= song.artworkUrl %>" alt="Cover art">
+            <% } %>
+            <div class="song-info">
+              <strong><%= song.title %></strong> — <%= song.artist %><br>
+              <a href="<%= song.url %>" target="_blank">View on Genius</a>
+            </div>
+
+            <form action="/favorites" method="POST" class="favorite-form">
+              <input type="hidden" name="apiId" value="<%= song.id %>">
+              <input type="hidden" name="title" value="<%= song.title %>">
+              <input type="hidden" name="artist" value="<%= song.artist %>">
+              <input type="hidden" name="album" value="<%= song.fullTitle %>">
+              <input type="hidden" name="previewUrl" value="<%= song.url %>">
+              <input type="hidden" name="artworkUrl" value="<%= song.artworkUrl %>">
+              <button type="submit">Save</button>
+            </form>
+          </li>
+        <% }) %>
+      </ul>
+    <% } %>
+  </main>
+</body>
+</html>
