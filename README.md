@@ -6,7 +6,7 @@
 
 **YouTube Video Link:** [https://www.youtube.com/watch?v=cS14N7AZxF0](https://www.youtube.com/watch?v=cS14N7AZxF0)
 
-**APIs:** Genius ([https://api.genius.com](https://api.genius.com))
+**APIs:** Genius ([https://api.genius.com](https://api.genius.com)) GeniusAPI docs: [https://docs.genius.com/](https://docs.genius.com/)
 
 **Contact Email:** jwang314@terpmail.umd.edu
 
