@@ -4,7 +4,7 @@
 
 **App Description:** Allow users to easily search lyrics for songs from Genius and save them all in one place.
 
-**YouTube Video Link:** [youtube demo link]()
+**YouTube Video Link:** [https://www.youtube.com/watch?v=cS14N7AZxF0](https://www.youtube.com/watch?v=cS14N7AZxF0)
 
 **APIs:** Genius ([https://api.genius.com](https://api.genius.com))
 
